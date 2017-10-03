@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BusLocator</string>
+    <string name="titleHome">Inicio</string>
+    <string name="titleSeccion">Encuentra ...</string>
+    <string name="titleTransp">Transportes</string>
+    <string name="titleRutas">Rutas</string>
+    <string name="titleParaderos">Paraderos</string>
+    <string name="titleConf">Configuración</string>
+    <string name="titleSalir">Salir</string>
+
+    <string name="titleSearch">Buscador</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_route_fragment">Rutas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_bustop_fragment">Paraderos</string>
+
+</resources>
