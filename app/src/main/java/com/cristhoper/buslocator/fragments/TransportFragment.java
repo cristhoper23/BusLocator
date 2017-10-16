@@ -35,7 +35,9 @@ public class TransportFragment extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_transport, container, false);
 
+        getActivity().setTitle("Transportes");
         List<Transport> transports = TransportRepository.getTransports();
+
         recyclerTransp = vista.findViewById(R.id.recycler_transp);
         recyclerTransp.setLayoutManager(new LinearLayoutManager(getContext()));
 

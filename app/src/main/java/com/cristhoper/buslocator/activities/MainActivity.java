@@ -8,9 +8,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -31,12 +33,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // Set drawer toggle icon
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        /*This class provides a handy way to tie together the functionality of DrawerLayout and the framework ActionBar
+        to implement the recommended design for navigation drawers.*/
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, android.R.string.ok, android.R.string.cancel);
+        drawerLayout.addDrawerListener(toggle); //Adds the specified listener to the list of listeners that will be notified of drawer events.
+        toggle.syncState(); //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -48,19 +52,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 switch (item.getItemId()){
                     case R.id.nav_transp:
                         Fragment fragTransp = new TransportFragment();
-                        setTitle("Transportes");
                         // Replace content
                         fragmentManager.beginTransaction().replace(R.id.main_content, fragTransp).addToBackStack("tag").commit();
                         break;
                     case R.id.nav_routes:
                         Fragment fragRoutes = new RouteFragment();
-                        setTitle("Rutas");
                         // Replace content
                         fragmentManager.beginTransaction().replace(R.id.main_content, fragRoutes).addToBackStack("tag").commit();
                         break;
                     case R.id.nav_bustop:
                         Fragment fragBustop = new BustopFragment();
-                        setTitle("Paraderos");
                         // Replace content
                         fragmentManager.beginTransaction().replace(R.id.main_content, fragBustop).addToBackStack("tag").commit();
                         break;
