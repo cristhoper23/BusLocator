@@ -15,7 +15,16 @@ public class BusStopRepository {
 
     static {
         busStopList = new ArrayList<>();
-        busStopList.add(new BusStop(-12.2407346, -76.9229523, "My home"));
+        busStopList.add(new BusStop(-12.2396649, -76.928194, "Av. Forestal"));
+        busStopList.add(new BusStop(-12.2391815, -76.9287076, "Oasis 1"));
+        busStopList.add(new BusStop(-12.2353719, -76.9350211, "Oasis 2"));
+        busStopList.add(new BusStop(-12.2339414, -76.9348312, "Av. Pastor Sevilla"));
+        busStopList.add(new BusStop(-12.2311157, -76.9376556, "Av. Talara"));
+        busStopList.add(new BusStop(-12.2287509, -76.9390645, "Av. Olaya"));
+        busStopList.add(new BusStop(-12.2250500, -76.9405168, "Av. Mariátgui"));
+        busStopList.add(new BusStop(-12.2234635, -76.9422505, "Av. 3 de Octubre"));
+        busStopList.add(new BusStop(-12.2186482, -76.9451071, "Av. Vallejo"));
+        busStopList.add(new BusStop(-12.2158451, -76.9467828, "Av. Jorge Chavez"));
     }
 
     public static List<BusStop> getBusStopList() {

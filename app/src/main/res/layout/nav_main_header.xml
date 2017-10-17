@@ -33,5 +33,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.StatusBar.EventContent.Title"
         android:textStyle="bold"
-        tools:text="cristhoper.yanez@tecsup.edu.pe"/>
+        android:onClick="registrarCuenta"
+        android:text="Ingresar o Registrarse"/>
 </LinearLayout>
