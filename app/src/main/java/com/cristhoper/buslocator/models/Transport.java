@@ -5,39 +5,61 @@ package com.cristhoper.buslocator.models;
  */
 
 public class Transport {
-    private String name;
-    private int picture;
+    private String empresa;
+    private String id_ruta;
+    private String desc_ruta;
+    private int icon_bus;
 
     public Transport(){
 
     }
 
-    public Transport(String name, int picture) {
-        this.name = name;
-        this.picture = picture;
+    public Transport(String empresa, String id_ruta, String desc_ruta, int icon_bus) {
+        this.empresa = empresa;
+        this.id_ruta = id_ruta;
+        this.desc_ruta = desc_ruta;
+        this.icon_bus = icon_bus;
     }
 
-    public String getName() {
-        return name;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
-    public int getPicture() {
-        return picture;
+    public String getId_ruta() {
+        return id_ruta;
     }
 
-    public void setPicture(int picture) {
-        this.picture = picture;
+    public void setId_ruta(String id_ruta) {
+        this.id_ruta = id_ruta;
+    }
+
+    public String getDesc_ruta() {
+        return desc_ruta;
+    }
+
+    public void setDesc_ruta(String desc_ruta) {
+        this.desc_ruta = desc_ruta;
+    }
+
+    public int getIcon_bus() {
+        return icon_bus;
+    }
+
+    public void setIcon_bus(int icon_bus) {
+        this.icon_bus = icon_bus;
     }
 
     @Override
     public String toString() {
         return "Transport{" +
-                "name='" + name + '\'' +
-                ", picture=" + picture +
+                "empresa='" + empresa + '\'' +
+                ", id_ruta='" + id_ruta + '\'' +
+                ", desc_ruta='" + desc_ruta + '\'' +
+                ", icon_bus=" + icon_bus +
                 '}';
     }
 }

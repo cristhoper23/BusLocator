@@ -15,8 +15,8 @@ public class TransportRepository {
 
     static {
         transports = new ArrayList<>();
-        transports.add(new Transport("Etuchisa", R.drawable.bg_etuchisa));
-        transports.add(new Transport("El Rápido", R.drawable.bg_elrapido));
+        transports.add(new Transport("Etuchisa", "1802", "Pte. Piedra - Villa El Salvador", R.mipmap.ic_launcher));
+        transports.add(new Transport("El Rápido", "2411", "San Martín de Porres - Lurigancho", R.mipmap.ic_launcher));
     }
 
     public static List<Transport> getTransports(){

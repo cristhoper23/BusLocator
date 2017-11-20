@@ -4,11 +4,14 @@ package com.cristhoper.buslocator.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,9 +43,10 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap mGoogleMap;
     MapView mapView;
     View mView;
+    FloatingActionButton myLocationButton; //setBackgroundTi...
 
     private Marker markerMyPosition;
-    private double lat = 0.0, lng = 0.0;
+    double lat = 0.0, lng = 0.0;
 
     public BustopFragment() {
         // Required empty public constructor
@@ -56,6 +60,15 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
         mView = inflater.inflate(R.layout.fragment_bustop, container, false);
         getActivity().setTitle("Paraderos");
 
+        myLocationButton = mView.findViewById(R.id.btnFAB);
+        myLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng coordinates = new LatLng(lat,lng);
+                CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
+                mGoogleMap.animateCamera(myPosition);
+            }
+        });
         return mView;
     }
 
@@ -72,6 +85,7 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
             mapView.getMapAsync(this);
         }
         //----
+
     }
 
     @Override
@@ -84,9 +98,9 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //googleMap.addMarker(new MarkerOptions().position(new LatLng(-12.2407346, -76.9229523)).title("no vengan!!").snippet("Hola mundo"));
-
         myLocation();
         getMarkers(googleMap);
+        cameraPosition(lat,lng);
     }
 
     public void getMarkers(GoogleMap googleMap) {
@@ -111,8 +125,6 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
 
     private void myLocation() {
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(getContext().LOCATION_SERVICE);
-
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -123,6 +135,7 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(getContext().LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         updateLocation(location);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000,0,locListener);
@@ -160,15 +173,21 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
 
     private void addMarker(double latitude, double longitude) {
         LatLng coordinates = new LatLng(latitude, longitude);
-        CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 16);
 
         if (markerMyPosition != null)
             markerMyPosition.remove();
 
+        BitmapDescriptor iconMyPosition = BitmapDescriptorFactory.fromResource(R.drawable.ic_current_position);
+
         markerMyPosition = mGoogleMap.addMarker(new MarkerOptions()
                 .position(coordinates)
                 .title("Mi posición actual"));
-        mGoogleMap.animateCamera(myPosition);
+                //.icon(iconMyPosition));
     }
 
+    public void cameraPosition(double lat, double lon){
+        LatLng coordinates = new LatLng(lat, lon);
+        CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
+        mGoogleMap.animateCamera(myPosition);
+    }
 }

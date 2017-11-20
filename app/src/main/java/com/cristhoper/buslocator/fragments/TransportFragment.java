@@ -23,8 +23,6 @@ import java.util.List;
  */
 public class TransportFragment extends Fragment {
 
-    private RecyclerView recyclerTransp;
-
     public TransportFragment() {
         // Required empty public constructor
     }
@@ -38,7 +36,7 @@ public class TransportFragment extends Fragment {
         getActivity().setTitle("Transportes");
         List<Transport> transports = TransportRepository.getTransports();
 
-        recyclerTransp = vista.findViewById(R.id.recycler_transp);
+        RecyclerView recyclerTransp = vista.findViewById(R.id.recycler_transp);
         recyclerTransp.setLayoutManager(new LinearLayoutManager(getContext()));
 
         TransportAdapter adapter = new TransportAdapter();

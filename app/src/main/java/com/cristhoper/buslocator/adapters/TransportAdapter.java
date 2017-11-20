@@ -37,29 +37,35 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
         return viewHolder;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView empresa;
+        public TextView id_ruta;
+        public TextView desc_ruta;
+        public ImageView icon_bus;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            empresa = itemView.findViewById(R.id.tvEmpresa);
+            id_ruta = itemView.findViewById(R.id.tvRuta);
+            desc_ruta = itemView.findViewById(R.id.tvDescRuta);
+            icon_bus = itemView.findViewById(R.id.ivIconBus);
+        }
+    }
+
     @Override
     public void onBindViewHolder(TransportAdapter.ViewHolder holder, int position) {
         Transport transp = this.transports.get(position);
 
-        holder.name_transp.setText(transp.getName());
-        holder.img_transp.setImageResource(transp.getPicture());
+        holder.empresa.setText(transp.getEmpresa());
+        holder.id_ruta.setText(transp.getId_ruta());
+        holder.desc_ruta.setText(transp.getDesc_ruta());
+        holder.icon_bus.setImageResource(transp.getIcon_bus());
     }
 
     @Override
     public int getItemCount() {
         return this.transports.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public ImageView img_transp;
-        public TextView name_transp;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            img_transp = (ImageView) itemView.findViewById(R.id.ivTransp);
-            name_transp = (TextView) itemView.findViewById(R.id.tvEtuchisa);
-        }
     }
 }
