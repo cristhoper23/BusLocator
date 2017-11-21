@@ -24,6 +24,8 @@ import com.cristhoper.buslocator.fragments.BustopFragment;
 import com.cristhoper.buslocator.fragments.RouteFragment;
 import com.cristhoper.buslocator.fragments.TransportFragment;
 
+import static android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
+
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     DrawerLayout drawerLayout;
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        //fragmentManager.popBackStackImmediate();
         getTransportFragment();
     }
 
@@ -95,29 +99,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    //--- Métodos para el buscador
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_buscador,menu);
-        MenuItem item = menu.findItem(R.id.buscador);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-
-        //searchView.setOnQueryTextListener(this);
-        return true;
-    }
-    //---
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
-
 
     //--- Funciones para obtener los fragments
     public void getTransportFragment(){
@@ -141,5 +122,26 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     public void registrarCuenta(View view){
         startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+    }
+
+    //--- Métodos para el buscador
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_buscador,menu);
+        MenuItem item = menu.findItem(R.id.buscador);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        //searchView.setOnQueryTextListener(this);
+        return true;
+    }
+    //---
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

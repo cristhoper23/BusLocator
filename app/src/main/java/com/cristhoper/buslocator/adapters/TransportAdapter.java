@@ -1,5 +1,6 @@
 package com.cristhoper.buslocator.adapters;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,11 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
 
     private List<Transport> transports;
 
-    public TransportAdapter(){
+    private Activity activity;
+
+    public TransportAdapter(Activity activity){
         this.transports = new ArrayList<>();
+        this.activity = activity;
     }
 
     public void setTransports(List<Transport> transports) {
@@ -50,7 +54,7 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
             empresa = itemView.findViewById(R.id.tvEmpresa);
             id_ruta = itemView.findViewById(R.id.tvRuta);
             desc_ruta = itemView.findViewById(R.id.tvDescRuta);
-            icon_bus = itemView.findViewById(R.id.ivIconBus);
+            //icon_bus = itemView.findViewById(R.id.ivIconBus);
         }
     }
 
@@ -58,10 +62,10 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
     public void onBindViewHolder(TransportAdapter.ViewHolder holder, int position) {
         Transport transp = this.transports.get(position);
 
-        holder.empresa.setText(transp.getEmpresa());
-        holder.id_ruta.setText(transp.getId_ruta());
-        holder.desc_ruta.setText(transp.getDesc_ruta());
-        holder.icon_bus.setImageResource(transp.getIcon_bus());
+        holder.empresa.setText(transp.getNombre());
+        holder.id_ruta.setText(transp.getRuta());
+        holder.desc_ruta.setText(transp.getDescripcion());
+        //holder.icon_bus.setImageResource(transp.getImagen());
     }
 
     @Override

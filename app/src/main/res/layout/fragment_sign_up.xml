@@ -27,6 +27,7 @@
                 android:id="@+id/et_signUp_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/hintUserSignUp"/>
         </android.support.design.widget.TextInputLayout>

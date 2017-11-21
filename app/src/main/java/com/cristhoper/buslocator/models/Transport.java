@@ -5,61 +5,59 @@ package com.cristhoper.buslocator.models;
  */
 
 public class Transport {
-    private String empresa;
-    private String id_ruta;
-    private String desc_ruta;
-    private int icon_bus;
+    private int id_empresa;
+    private String nombre;
+    private String ruta;
+    private String descripcion;
+    private String imagen;
 
-    public Transport(){
-
+    public int getId_empresa() {
+        return id_empresa;
     }
 
-    public Transport(String empresa, String id_ruta, String desc_ruta, int icon_bus) {
-        this.empresa = empresa;
-        this.id_ruta = id_ruta;
-        this.desc_ruta = desc_ruta;
-        this.icon_bus = icon_bus;
+    public void setId_empresa(int id_empresa) {
+        this.id_empresa = id_empresa;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getId_ruta() {
-        return id_ruta;
+    public String getRuta() {
+        return ruta;
     }
 
-    public void setId_ruta(String id_ruta) {
-        this.id_ruta = id_ruta;
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 
-    public String getDesc_ruta() {
-        return desc_ruta;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDesc_ruta(String desc_ruta) {
-        this.desc_ruta = desc_ruta;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public int getIcon_bus() {
-        return icon_bus;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setIcon_bus(int icon_bus) {
-        this.icon_bus = icon_bus;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override
     public String toString() {
         return "Transport{" +
-                "empresa='" + empresa + '\'' +
-                ", id_ruta='" + id_ruta + '\'' +
-                ", desc_ruta='" + desc_ruta + '\'' +
-                ", icon_bus=" + icon_bus +
+                "nombre='" + nombre + '\'' +
+                ", ruta='" + ruta + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen=" + imagen +
                 '}';
     }
 }
