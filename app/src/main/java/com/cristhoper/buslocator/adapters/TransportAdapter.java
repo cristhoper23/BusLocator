@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.cristhoper.buslocator.R;
 import com.cristhoper.buslocator.models.Transport;
+import com.cristhoper.buslocator.services.ApiService;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,7 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
             empresa = itemView.findViewById(R.id.tvEmpresa);
             id_ruta = itemView.findViewById(R.id.tvRuta);
             desc_ruta = itemView.findViewById(R.id.tvDescRuta);
-            //icon_bus = itemView.findViewById(R.id.ivIconBus);
+            icon_bus = itemView.findViewById(R.id.ivIconBus);
         }
     }
 
@@ -65,7 +67,9 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
         holder.empresa.setText(transp.getNombre());
         holder.id_ruta.setText(transp.getRuta());
         holder.desc_ruta.setText(transp.getDescripcion());
-        //holder.icon_bus.setImageResource(transp.getImagen());
+
+        String url = ApiService.API_BASE_URL + "/images/transportes/" + transp.getImagen();
+        Picasso.with(holder.itemView.getContext()).load(url).into(holder.icon_bus);
     }
 
     @Override
