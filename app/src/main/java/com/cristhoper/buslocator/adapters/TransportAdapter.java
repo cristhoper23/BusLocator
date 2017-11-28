@@ -1,7 +1,10 @@
 package com.cristhoper.buslocator.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cristhoper.buslocator.R;
+import com.cristhoper.buslocator.activities.RouteActivity;
 import com.cristhoper.buslocator.models.Transport;
 import com.cristhoper.buslocator.services.ApiService;
 import com.squareup.picasso.Picasso;
@@ -62,14 +66,26 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
 
     @Override
     public void onBindViewHolder(TransportAdapter.ViewHolder holder, int position) {
-        Transport transp = this.transports.get(position);
+        final Transport transport = this.transports.get(position);
 
-        holder.empresa.setText(transp.getNombre());
-        holder.id_ruta.setText(transp.getRuta());
-        holder.desc_ruta.setText(transp.getDescripcion());
+        holder.empresa.setText(transport.getNombre());
+        holder.id_ruta.setText(transport.getId_ruta());
+        holder.desc_ruta.setText(transport.getDescripcion());
 
-        String url = ApiService.API_BASE_URL + "/images/transportes/" + transp.getImagen();
+        String url = ApiService.API_BASE_URL + "/images/transportes/" + transport.getImagen();
         Picasso.with(holder.itemView.getContext()).load(url).into(holder.icon_bus);
+
+        //Muestra la ruta y paraderos de un cardview
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent routeAct = new Intent(activity, RouteActivity.class);
+                //Log.d("ID_RUTAAAAA", "el id_ruta de un transporte" + transport.getId_ruta());
+                routeAct.putExtra("id_ruta", transport.getId_ruta());
+                activity.startActivity(routeAct);
+
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.cristhoper.buslocator.services;
 
+import com.cristhoper.buslocator.models.BusStop;
 import com.cristhoper.buslocator.models.Transport;
 import com.cristhoper.buslocator.models.Usuario;
 
@@ -10,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by Cris on 20/11/2017.
@@ -17,7 +19,7 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    String API_BASE_URL = "https://empresas-app-mrpapita.c9users.io";
+    String API_BASE_URL = "https://bus-locator-cristhoper23.c9users.io/";
 
     //https://bus-locator-cristhoper23.c9users.io
     @FormUrlEncoded
@@ -32,6 +34,12 @@ public interface ApiService {
                                            @Field("email") String email,
                                            @Field("fullname") String fullname);
 
-    @GET("api/v1/empresas")
+    @GET("api/v1/transportes")
     Call<List<Transport>> getAllTransportes();
+
+    @GET("api/v1/ruta/{id}")
+    Call<List<BusStop>> showRouteAndBustop(@Path("id") String id);
+
+    @GET("api/v1/paraderos")
+    Call<List<BusStop>> getAllBusStops();
 }

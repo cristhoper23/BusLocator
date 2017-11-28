@@ -5,49 +5,50 @@ package com.cristhoper.buslocator.models;
  */
 
 public class BusStop {
-    private double latitude;
-    private double longitude;
-    private String name;
+    private String id_paradero;
+    private String nombre;
+    private float latitud;
+    private float longitud;
 
-    public BusStop() {
+    public String getId_paradero() {
+        return id_paradero;
     }
 
-    public BusStop(double latitude, double longitude, String name) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name = name;
+    public void setId_paradero(String id_paradero) {
+        this.id_paradero = id_paradero;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public float getLatitud() {
+        return latitud;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
     }
 
-    public String getName() {
-        return name;
+    public float getLongitud() {
+        return longitud;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
     }
 
     @Override
     public String toString() {
         return "BusStop{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", name='" + name + '\'' +
+                "id_paradero='" + id_paradero + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
                 '}';
     }
 }

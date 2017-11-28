@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BusStopRepository {
 
-    private static List<BusStop> busStopList;
+    /*private static List<BusStop> busStopList;
 
     static {
         busStopList = new ArrayList<>();
@@ -29,5 +29,5 @@ public class BusStopRepository {
 
     public static List<BusStop> getBusStopList() {
         return busStopList;
-    }
+    }*/
 }

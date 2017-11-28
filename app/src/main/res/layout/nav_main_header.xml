@@ -31,7 +31,6 @@
         style="@style/Widget.AppCompat.Spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.StatusBar.EventContent.Title"
         android:textStyle="bold"
         android:onClick="registrarCuenta"
         android:text="Ingresar o Registrarse"/>

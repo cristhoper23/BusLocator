@@ -18,10 +18,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cristhoper.buslocator.R;
+import com.cristhoper.buslocator.adapters.TransportAdapter;
 import com.cristhoper.buslocator.models.BusStop;
+import com.cristhoper.buslocator.models.Transport;
 import com.cristhoper.buslocator.repositories.BusStopRepository;
+import com.cristhoper.buslocator.services.ApiService;
+import com.cristhoper.buslocator.services.ApiServiceGenerator;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,12 +40,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BustopFragment extends Fragment implements OnMapReadyCallback {
 
-    GoogleMap mGoogleMap;
+    private static final String TAG = BustopFragment.class.getSimpleName();
+
+    GoogleMap gMap;
     MapView mapView;
     View mView;
     FloatingActionButton myLocationButton; //setBackgroundTi...
@@ -60,15 +71,19 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
         mView = inflater.inflate(R.layout.fragment_bustop, container, false);
         getActivity().setTitle("Paraderos");
 
+
         myLocationButton = mView.findViewById(R.id.btnFAB);
         myLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LatLng coordinates = new LatLng(lat,lng);
                 CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
-                mGoogleMap.animateCamera(myPosition);
+                gMap.animateCamera(myPosition);
             }
         });
+
+        initialize();
+
         return mView;
     }
 
@@ -94,31 +109,69 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
 
         //MapsInitializer.initialize(getContext());
 
-        mGoogleMap = googleMap;
+        gMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //googleMap.addMarker(new MarkerOptions().position(new LatLng(-12.2407346, -76.9229523)).title("no vengan!!").snippet("Hola mundo"));
         myLocation();
-        getMarkers(googleMap);
         cameraPosition(lat,lng);
     }
 
-    public void getMarkers(GoogleMap googleMap) {
+    public void initialize(){
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-        List<BusStop> busStopList = BusStopRepository.getBusStopList();
+        Call<List<BusStop>> call = service.getAllBusStops();
 
-        for (BusStop busStop : busStopList) {
-            double lat = busStop.getLatitude();
-            double lon = busStop.getLongitude();
-            String name = busStop.getName();
+        call.enqueue(new Callback<List<BusStop>>() {
+            @Override
+            public void onResponse(Call<List<BusStop>> call, Response<List<BusStop>> response) {
+                try {
 
-            BitmapDescriptor markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bg_etuchisa);
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        List<BusStop> paraderos = response.body();
+                        Log.d(TAG, "transportes: " + paraderos);
+
+                        //Método para obtener todos los paraderos
+                        getMarkers(paraderos);
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BusStop>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getMarkers(List<BusStop> paraderos) {
+
+        for (BusStop paradero : paraderos) {
+            double lat = paradero.getLatitud();
+            double lon = paradero.getLongitud();
+            String name = paradero.getNombre();
+
+            BitmapDescriptor markerIcon = BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_bustop);
             MarkerOptions customMarker = new MarkerOptions()
                     .position(new LatLng(lat, lon))
-                    .title(name);
-            //.icon(markerIcon);
+                    .title(name)
+                    .icon(markerIcon);
 
-            googleMap.addMarker(customMarker);
+            gMap.addMarker(customMarker);
             //googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title(name));
         }
     }
@@ -177,17 +230,17 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
         if (markerMyPosition != null)
             markerMyPosition.remove();
 
-        BitmapDescriptor iconMyPosition = BitmapDescriptorFactory.fromResource(R.drawable.ic_current_position);
+        BitmapDescriptor iconMyPosition = BitmapDescriptorFactory.fromResource(R.mipmap.ic_my_position);
 
-        markerMyPosition = mGoogleMap.addMarker(new MarkerOptions()
+        markerMyPosition = gMap.addMarker(new MarkerOptions()
                 .position(coordinates)
-                .title("Mi posición actual"));
-                //.icon(iconMyPosition));
+                .title("Mi posición actual")
+                .icon(iconMyPosition));
     }
 
     public void cameraPosition(double lat, double lon){
         LatLng coordinates = new LatLng(lat, lon);
         CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
-        mGoogleMap.animateCamera(myPosition);
+        gMap.animateCamera(myPosition);
     }
 }
