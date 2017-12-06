@@ -5,18 +5,18 @@ package com.cristhoper.buslocator.models;
  */
 
 public class Transport {
-    private int id_transp;
+    private int id_empresa;
     private String nombre;
     private String id_ruta;
     private String descripcion;
     private String imagen;
 
-    public int getId_transp() {
-        return id_transp;
+    public int getId_empresa() {
+        return id_empresa;
     }
 
-    public void setId_transp(int id_transp) {
-        this.id_transp = id_transp;
+    public void setId_empresa(int id_empresa) {
+        this.id_empresa = id_empresa;
     }
 
     public String getNombre() {

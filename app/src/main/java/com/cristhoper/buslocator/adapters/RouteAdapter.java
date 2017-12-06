@@ -65,6 +65,10 @@ public class RouteAdapter implements RoutingListener{
             //googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title(name));
         }
 
+        BusStop paradero_inicial = paraderos.get(0);
+
+
+
         LatLng start = new LatLng(-12.235392, -76.911816);
 
         LatLng avMariaReiche= new LatLng(-12.243387, -76.918747);
@@ -113,12 +117,12 @@ public class RouteAdapter implements RoutingListener{
 
             PolylineOptions polyOptions = new PolylineOptions();
             polyOptions.color(activity.getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(6);
+            polyOptions.width(3);
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = googleMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(activity,"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(activity,"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
     }
 

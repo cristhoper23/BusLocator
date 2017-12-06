@@ -25,11 +25,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -37,7 +32,16 @@
             android:value="AIzaSyAVzHLDAqvdwx09h-rzoV9Z4GJKZHsOd-Y" />
 
         <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.RouteActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.RouteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.SplashActivity" android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

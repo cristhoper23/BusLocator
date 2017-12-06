@@ -81,10 +81,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
-        //fragmentManager.popBackStackImmediate();
-        getTransportFragment();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -120,9 +122,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
     //---
 
+
     public void registrarCuenta(View view){
         startActivity(new Intent(MainActivity.this, RegisterActivity.class));
     }
+
+
+
 
     //--- Métodos para el buscador
     public boolean onCreateOptionsMenu(Menu menu){

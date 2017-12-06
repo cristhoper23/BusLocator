@@ -7,8 +7,8 @@ package com.cristhoper.buslocator.models;
 public class BusStop {
     private String id_paradero;
     private String nombre;
-    private float latitud;
-    private float longitud;
+    private double latitud;
+    private double longitud;
 
     public String getId_paradero() {
         return id_paradero;
@@ -26,19 +26,19 @@ public class BusStop {
         this.nombre = nombre;
     }
 
-    public float getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(float latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public float getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(float longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 

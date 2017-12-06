@@ -133,7 +133,7 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
                     if (response.isSuccessful()) {
 
                         List<BusStop> paraderos = response.body();
-                        Log.d(TAG, "transportes: " + paraderos);
+                        Log.d(TAG, "paraderos: " + paraderos);
 
                         //Método para obtener todos los paraderos
                         getMarkers(paraderos);
