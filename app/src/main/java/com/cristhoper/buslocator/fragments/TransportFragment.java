@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cristhoper.buslocator.R;
@@ -34,7 +35,7 @@ public class TransportFragment extends Fragment {
 
     private static final String TAG = TransportFragment.class.getSimpleName();
 
-    RecyclerView transportesList;
+    ListView listaTransportes;
 
     public TransportFragment() {
         // Required empty public constructor
@@ -48,15 +49,7 @@ public class TransportFragment extends Fragment {
 
         getActivity().setTitle("Transportes");
 
-        //List<Transport> transports = TransportRepository.getTransports();
-
-        transportesList = vista.findViewById(R.id.recycler_transp);
-        transportesList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        /*TransportAdapter adapter = new TransportAdapter();
-        adapter.setTransports(transports);*/
-
-        transportesList.setAdapter(new TransportAdapter(getActivity()));
+        listaTransportes = vista.findViewById(R.id.listview_transp);
 
         initialize();
 
@@ -83,8 +76,9 @@ public class TransportFragment extends Fragment {
                         List<Transport> transportes = response.body();
                         Log.d(TAG, "transportes: " + transportes);
 
-                        TransportAdapter adapter = (TransportAdapter) transportesList.getAdapter();
-                        adapter.setTransports(transportes);
+                        TransportAdapter adapter = new TransportAdapter(getContext(), transportes);
+                        listaTransportes.setAdapter(adapter);
+
                         adapter.notifyDataSetChanged();
 
                     } else {

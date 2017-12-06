@@ -6,8 +6,8 @@
     tools:context="com.cristhoper.buslocator.fragments.TransportFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_transp"
+    <ListView
+        android:id="@+id/listview_transp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
