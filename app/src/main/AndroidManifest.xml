@@ -37,7 +37,10 @@
             android:value="AIzaSyAVzHLDAqvdwx09h-rzoV9Z4GJKZHsOd-Y" />
 
         <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.RouteActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.RouteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.SplashActivity"></activity>
     </application>
 
 </manifest>

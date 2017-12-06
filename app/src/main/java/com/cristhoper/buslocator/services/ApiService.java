@@ -19,9 +19,10 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    String API_BASE_URL = "https://bus-locator-cristhoper23.c9users.io/";
+    String API_BASE_URL = "http://buswebservice.sa-east-1.elasticbeanstalk.com/";
 
-    //https://bus-locator-cristhoper23.c9users.io
+    //https://bus-locator-cristhoper23.c9users.io/
+
     @FormUrlEncoded
     @POST("/api/v1/login")
     Call<Usuario> iniciarSesion(@Field("username") String username,
