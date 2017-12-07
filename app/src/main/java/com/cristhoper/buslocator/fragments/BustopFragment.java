@@ -77,7 +77,7 @@ public class BustopFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 LatLng coordinates = new LatLng(lat,lng);
-                CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
+                CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 20);
                 gMap.animateCamera(myPosition);
             }
         });

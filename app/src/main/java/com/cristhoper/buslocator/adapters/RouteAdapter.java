@@ -9,6 +9,8 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -50,9 +52,9 @@ public class RouteAdapter implements RoutingListener{
         this.avenidas = avenidas;
     }
 
-    private int getItemCount(){
+    /*private int getItemCount(){
         return paraderos.size();
-    }
+    }*/
 
     public void getMarker(){
 
@@ -72,6 +74,12 @@ public class RouteAdapter implements RoutingListener{
         }
 
         BusStop paradero_inicial = paraderos.get(0);
+        double lat = paradero_inicial.getLatitud();
+        double lon = paradero_inicial.getLongitud();
+
+        LatLng coordinates = new LatLng(lat, lon);
+        CameraUpdate myPosition = CameraUpdateFactory.newLatLngZoom(coordinates, 17);
+        googleMap.animateCamera(myPosition);
 
         /*LatLng start = new LatLng(-12.235392, -76.911816);
 

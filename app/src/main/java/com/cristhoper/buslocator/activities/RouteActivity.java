@@ -40,7 +40,7 @@ public class RouteActivity extends AppCompatActivity implements OnMapReadyCallba
 
         id_ruta = getIntent().getExtras().getString("id_ruta");
 
-        //Log.d("ID_RUTAAAAA", "el id_ruta de un transporte   " + id_ruta);
+        Log.d("ID_RUTAAAAA", "el id_ruta de un transporte   " + id_ruta);
         mapView = findViewById(R.id.route_map);
 
         if (mapView != null) {
