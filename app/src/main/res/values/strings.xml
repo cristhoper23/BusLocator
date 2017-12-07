@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BusLocator</string>
+    <string name="app_name">BusMax</string>
     <string name="titleHome">Inicio</string>
     <string name="titleSeccion">Encuentra ...</string>
     <string name="titleTransp">Transportes</string>
