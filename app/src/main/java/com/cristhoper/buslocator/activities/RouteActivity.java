@@ -10,20 +10,14 @@ import android.widget.Toast;
 
 import com.cristhoper.buslocator.R;
 import com.cristhoper.buslocator.adapters.RouteAdapter;
+import com.cristhoper.buslocator.models.Avenida;
 import com.cristhoper.buslocator.models.BusStop;
 import com.cristhoper.buslocator.services.ApiService;
 import com.cristhoper.buslocator.services.ApiServiceGenerator;
-import com.directions.route.Route;
-import com.directions.route.RouteException;
-import com.directions.route.RoutingListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -114,6 +108,46 @@ public class RouteActivity extends AppCompatActivity implements OnMapReadyCallba
 
             @Override
             public void onFailure(Call<List<BusStop>> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(RouteActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Call<List<Avenida>> call_2 = service.showAvenueforRoute(id_ruta);
+
+        call_2.enqueue(new Callback<List<Avenida>>() {
+            @Override
+            public void onResponse(Call<List<Avenida>> call, Response<List<Avenida>> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        List<Avenida> avenidas = response.body();
+                        Log.d(TAG, "avenidas: " + avenidas);
+
+                        RouteAdapter routeAdapter = new RouteAdapter(RouteActivity.this, gMap);
+                        routeAdapter.setAvenidas(avenidas);
+                        routeAdapter.getAvenida();
+                        //adapter.notifyDataSetChanged();
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(RouteActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Avenida>> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.toString());
                 Toast.makeText(RouteActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }

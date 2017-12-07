@@ -1,9 +1,9 @@
 package com.cristhoper.buslocator.adapters;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import com.cristhoper.buslocator.R;
+import com.cristhoper.buslocator.models.Avenida;
 import com.cristhoper.buslocator.models.BusStop;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
@@ -44,6 +44,12 @@ public class RouteAdapter implements RoutingListener{
         this.paraderos = paraderos;
     }
 
+    private List<Avenida> avenidas;
+
+    public void setAvenidas(List<Avenida> avenidas) {
+        this.avenidas = avenidas;
+    }
+
     private int getItemCount(){
         return paraderos.size();
     }
@@ -67,9 +73,7 @@ public class RouteAdapter implements RoutingListener{
 
         BusStop paradero_inicial = paraderos.get(0);
 
-
-
-        LatLng start = new LatLng(-12.235392, -76.911816);
+        /*LatLng start = new LatLng(-12.235392, -76.911816);
 
         LatLng avMariaReiche= new LatLng(-12.243387, -76.918747);
         LatLng avForestal= new LatLng(-12.242024, -76.926204);
@@ -86,6 +90,26 @@ public class RouteAdapter implements RoutingListener{
                 .withListener(this)
                 .alternativeRoutes(false)
                 .waypoints(start, avMariaReiche, avForestal, avOasis, av200M, avPastorSevilla, avMateoPumacahua, CarrPanamericana, end)
+                .build();
+        routing.execute();*/
+    }
+
+    public void getAvenida(){
+        List<LatLng> waypoints = new ArrayList<>();
+
+        for (Avenida avenida: avenidas){
+            float lat = avenida.getLatitud();
+            float lon = avenida.getLongitud();
+            LatLng point = new LatLng(lat, lon);
+
+            waypoints.add(point);
+        }
+
+        Routing routing = new Routing.Builder()
+                .travelMode(Routing.TravelMode.DRIVING)
+                .withListener(this)
+                .alternativeRoutes(false)
+                .waypoints(waypoints)
                 .build();
         routing.execute();
     }
@@ -122,7 +146,7 @@ public class RouteAdapter implements RoutingListener{
             Polyline polyline = googleMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            //Toast.makeText(activity,"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(activity,"Avenida "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
         }
     }
 

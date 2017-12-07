@@ -1,6 +1,7 @@
 package com.cristhoper.buslocator.services;
 
 import com.cristhoper.buslocator.models.BusStop;
+import com.cristhoper.buslocator.models.Avenida;
 import com.cristhoper.buslocator.models.Transport;
 import com.cristhoper.buslocator.models.Usuario;
 
@@ -40,6 +41,9 @@ public interface ApiService {
 
     @GET("api/v1/ruta/{id}")
     Call<List<BusStop>> showRouteAndBustop(@Path("id") String id);
+
+    @GET("api/v1/avenida/{id}")
+    Call<List<Avenida>> showAvenueforRoute(@Path("id") String id);
 
     @GET("api/v1/paraderos")
     Call<List<BusStop>> getAllBusStops();
