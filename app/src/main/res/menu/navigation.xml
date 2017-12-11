@@ -10,10 +10,6 @@
                     android:title="@string/titleTransp"
                     android:icon="@mipmap/ic_bus"/>
                 <item
-                    android:id="@+id/nav_routes"
-                    android:title="@string/titleRutas"
-                    android:icon="@mipmap/ic_route"/>
-                <item
                     android:id="@+id/nav_bustop"
                     android:title="@string/titleParaderos"
                     android:icon="@mipmap/ic_bustop"/>

@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     case R.id.nav_transp:
                         getTransportFragment();
                         break;
-                    case R.id.nav_routes:
+                    /*case R.id.nav_routes:
                         getRouteFragment();
-                        break;
+                        break;*/
                     case R.id.nav_bustop:
                         getBustopFragment();
                         break;

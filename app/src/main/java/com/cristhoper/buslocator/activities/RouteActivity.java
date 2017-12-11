@@ -3,6 +3,8 @@ package com.cristhoper.buslocator.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -152,5 +154,10 @@ public class RouteActivity extends AppCompatActivity implements OnMapReadyCallba
                 Toast.makeText(RouteActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
